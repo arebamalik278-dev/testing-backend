@@ -15,7 +15,7 @@ connectDB();
 
 // Middleware
 app.use(cors({
-    origin: ['https://clienttesting.vervel.app', 'https://admintesting.vercel.app']
+    origin: ['https://clienttesting.vercel.app', 'https://admintesting.vercel.app']
 }));
 app.use(express.json());
 
