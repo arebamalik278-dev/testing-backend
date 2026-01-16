@@ -8,32 +8,6 @@ const generateToken = (id) => {
     });
 };
 
-// @desc    Login admin
-// @route   POST /api/admins/login
-// @access  Public
-const loginAdmin = async (req, res) => {
-    try {
-        const { email, password } = req.body;
-
-        // Find admin by email
-        const admin = await Admin.findOne({ email }).select('+password');
-
-        if (admin && (await admin.matchPassword(password))) {
-            res.json({
-                _id: admin._id,
-                name: admin.name,
-                email: admin.email,
-                token: generateToken(admin._id)
-            });
-        } else {
-            res.status(401).json({ message: 'Invalid email or password' });
-        }
-    } catch (error) {
-        console.error('Admin Login Error:', error);
-        res.status(500).json({ message: 'Server error during admin login' });
-    }
-};
-
 // @desc    Register a new admin
 // @route   POST /api/admins/register
 // @access  Public (change to private for production)
@@ -69,7 +43,6 @@ const registerAdmin = async (req, res) => {
 };
 
 module.exports = {
-    loginAdmin,
     registerAdmin
 };
 
